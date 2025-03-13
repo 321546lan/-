@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易团 - 社区团购APP设计</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF4D4F;
+            --secondary: #FFF1F2;
+            --light: #F8F9FA;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #F0F2F5;
+            color: #333;
+        }
+        
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        
+        .bg-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .bg-light {
+            background-color: var(--light);
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .border-primary {
+            border-color: var(--primary);
+        }
+        
+        .phone-mockup {
+            width: 320px;
+            height: 650px;
+            background-color: white;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .status-bar {
+            height: 50px;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+            background-color: white;
+        }
+        
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 10px;
+        }
+        
+        .tab-bar {
+            height: 60px;
+            border-top: 1px solid #f0f0f0;
+            background-color: white;
+        }
+        
+        .shadow-soft {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="p-4">
+    <h1 class="text-2xl font-bold text-center mb-6">易团 - 社区团购APP设计</h1>
+    
+    <div class="max-w-6xl mx-auto">
+        <!-- 首页 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="flex items-center">
+                        <i class="fas fa-map-marker-alt text-primary mr-1"></i>
+                        <span class="text-sm">紫荆花园小区</span>
+                        <i class="fas fa-chevron-down text-xs ml-1"></i>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-search text-gray-500 mr-4"></i>
+                        <i class="fas fa-bell text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content">
+                    <!-- 搜索框 -->
+                    <div class="px-4 py-3">
+                        <div class="bg-gray-100 rounded-full flex items-center px-3 py-2">
+                            <i class="fas fa-search text-gray-400 mr-2"></i>
+                            <span class="text-gray-400 text-sm">搜索商品</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 轮播图 -->
+                    <div class="px-4 mb-4">
+                        <div class="relative rounded-xl overflow-hidden shadow-soft">
+                            <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Banner" class="w-full h-36 object-cover">
+                            <div class="absolute bottom-2 right-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded-full">
+                                1/3
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 功能导航 -->
+                    <div class="grid grid-cols-5 gap-2 px-4 mb-4">
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                <i class="fas fa-apple-alt text-primary"></i>
+                            </div>
+                            <span class="text-xs">水果</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                <i class="fas fa-carrot text-primary"></i>
+                            </div>
+                            <span class="text-xs">蔬菜</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                <i class="fas fa-egg text-primary"></i>
+                            </div>
+                            <span class="text-xs">生鲜</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                <i class="fas fa-cookie text-primary"></i>
+                            </div>
+                            <span class="text-xs">零食</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                <i class="fas fa-th text-primary"></i>
+                            </div>
+                            <span class="text-xs">全部</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 智能配送入口 -->
+                    <div class="px-4 mb-4">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-3 shadow-soft flex items-center">
+                            <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-robot text-white text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-white font-medium mb-1">智能无人配送</div>
+                                <div class="text-white text-opacity-80 text-xs">安全、快捷、无接触配送体验</div>
+                            </div>
+                            <button class="bg-white text-blue-500 text-xs px-3 py-1 rounded-full font-medium">
+                                立即体验
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 限时特惠 -->
+                    <div class="px-4 mb-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <span class="text-base font-medium mr-2">限时特惠</span>
+                                <div class="flex items-center text-xs text-primary">
+                                    <span>距结束</span>
+                                    <span class="bg-primary text-white mx-1 px-1 rounded">23</span>
+                                    <span>:</span>
+                                    <span class="bg-primary text-white mx-1 px-1 rounded">45</span>
+                                    <span>:</span>
+                                    <span class="bg-primary text-white mx-1 px-1 rounded">12</span>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500">查看更多</div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                    <div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                                        限时
+                                    </div>
+                                </div>
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜红富士苹果 5斤装</div>
+                                    <div class="flex items-baseline">
+                                        <span class="text-primary font-bold">¥19.9</span>
+                                        <span class="text-gray-400 text-xs line-through ml-1">¥29.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <div class="relative">
+                                    <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                    <div class="absolute top-2 left-2 bg-primary text-white text-xs px-2 py-1 rounded-full">
+                                        限时
+                                    </div>
+                                </div>
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">农家散养土鸡蛋 30枚</div>
+                                    <div class="flex items-baseline">
+                                        <span class="text-primary font-bold">¥29.9</span>
+                                        <span class="text-gray-400 text-xs line-through ml-1">¥39.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 热门团购 -->
+                    <div class="px-4 mb-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-base font-medium">热门团购</span>
+                            <div class="text-xs text-gray-500">查看更多</div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-3 shadow-soft mb-3">
+                            <div class="flex items-center mb-2">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Leader" class="w-8 h-8 rounded-full object-cover mr-2 border-2 border-white shadow-soft">
+                                <div>
+                                    <div class="text-sm font-medium">李团长</div>
+                                    <div class="text-xs text-gray-500">紫荆花园小区3号楼</div>
+                                </div>
+                                <button class="ml-auto text-xs text-primary border border-primary px-2 py-1 rounded-full">
+                                    去参团
+                                </button>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden mr-3 shadow-soft">
+                                    <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜红富士苹果 5斤装</div>
+                                    <div class="flex items-baseline mb-1">
+                                        <span class="text-primary font-bold">¥19.9</span>
+                                        <span class="text-gray-400 text-xs line-through ml-1">¥29.9</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span>已有42人参团</span>
+                                        <span class="mx-2">|</span>
+                                        <span>剩余2天</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-3 shadow-soft">
+                            <div class="flex items-center mb-2">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Leader" class="w-8 h-8 rounded-full object-cover mr-2 border-2 border-white shadow-soft">
+                                <div>
+                                    <div class="text-sm font-medium">王团长</div>
+                                    <div class="text-xs text-gray-500">阳光小区</div>
+                                </div>
+                                <button class="ml-auto text-xs text-primary border border-primary px-2 py-1 rounded-full">
+                                    去参团
+                                </button>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden mr-3 shadow-soft">
+                                    <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">有机蔬菜套餐 10斤装</div>
+                                    <div class="flex items-baseline mb-1">
+                                        <span class="text-primary font-bold">¥49.9</span>
+                                        <span class="text-gray-400 text-xs line-through ml-1">¥69.9</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span>已有28人参团</span>
+                                        <span class="mx-2">|</span>
+                                        <span>剩余3天</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 猜你喜欢 -->
+                    <div class="px-4">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-base font-medium">猜你喜欢</span>
+                            <div class="text-xs text-gray-500">查看更多</div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1550258987-e8b4a8a464a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜葡萄 2斤装</div>
+                                    <div class="text-primary font-bold">¥15.9</div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1550828520-4cb496926fc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜草莓 500g装</div>
+                                    <div class="text-primary font-bold">¥19.9</div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜胡萝卜 3斤装</div>
+                                    <div class="text-primary font-bold">¥9.9</div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1594282486552-05a3b6fbfb63?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜茄子 2斤装</div>
+                                    <div class="text-primary font-bold">¥7.9</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar flex justify-around items-center px-2">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-home text-primary text-xl"></i>
+                        <span class="text-xs mt-1 text-primary">首页</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-th-large text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">分类</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-users text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">社区</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">购物车</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-user text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">我的</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">首页</p>
+        </div>
+        
+        <!-- 分类页 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="text-lg font-medium">分类</div>
+                    <div class="flex items-center">
+                        <i class="fas fa-search text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content flex">
+                    <!-- 左侧分类导航 -->
+                    <div class="w-1/4 bg-light">
+                        <div class="py-3 px-2 text-center text-primary bg-white border-l-4 border-primary">
+                            <span class="text-sm">水果</span>
+                        </div>
+                        <div class="py-3 px-2 text-center text-gray-500">
+                            <span class="text-sm">蔬菜</span>
+                        </div>
+                        <div class="py-3 px-2 text-center text-gray-500">
+                            <span class="text-sm">肉禽蛋</span>
+                        </div>
+                        <div class="py-3 px-2 text-center text-gray-500">
+                            <span class="text-sm">海鲜</span>
+                        </div>
+                        <div class="py-3 px-2 text-center text-gray-500">
+                            <span class="text-sm">乳品</span>
+                        </div>
+                        <div class="py-3 px-2 text-center text-gray-500">
+                            <span class="text-sm">零食</span>
+                        </div>
+                        <div class="py-3 px-2 text-center text-gray-500">
+                            <span class="text-sm">粮油</span>
+                        </div>
+                        <div class="py-3 px-2 text-center text-gray-500">
+                            <span class="text-sm">饮品</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧商品列表 -->
+                    <div class="w-3/4 bg-light p-3">
+                        <div class="bg-white rounded-xl p-3 mb-3 shadow-soft">
+                            <div class="font-medium mb-3">热门水果</div>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">苹果</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1550258987-e8b4a8a464a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">葡萄</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1550828520-4cb496926fc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">草莓</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-xl p-3 mb-3 shadow-soft">
+                            <div class="font-medium mb-3">蔬菜</div>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">青菜</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">番茄</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1518977956812-cd3dbadaaf31?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">黄瓜</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">胡萝卜</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1583687355032-81e4cfb53a3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">土豆</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <img src="https://images.unsplash.com/photo-1594282486552-05a3b6fbfb63?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mb-1 shadow-soft">
+                                    <span class="text-xs text-center">茄子</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar flex justify-around items-center px-2">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-home text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">首页</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-th-large text-primary text-xl"></i>
+                        <span class="text-xs mt-1 text-primary">分类</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-users text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">社区</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">购物车</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                                                <i class="fas fa-user text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">我的</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">分类页</p>
+        </div>
+        
+        <!-- 商品详情页 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-left text-gray-500"></i>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-sm mr-4">商品</span>
+                        <span class="text-sm mr-4 text-primary border-b-2 border-primary pb-1">详情</span>
+                        <span class="text-sm mr-4">评价</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-ellipsis-v text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content bg-light">
+                    <!-- 商品图片 -->
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Product" class="w-full h-80 object-cover">
+                        <div class="absolute top-3 right-3 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded-full">
+                            1/5
+                        </div>
+                    </div>
+                    
+                    <!-- 商品信息 -->
+                    <div class="bg-white p-4 shadow-soft">
+                        <div class="flex items-baseline mb-2">
+                            <span class="text-primary text-2xl font-bold">¥19.9</span>
+                            <span class="text-gray-400 text-sm line-through ml-2">¥29.9</span>
+                            <span class="ml-auto text-xs text-gray-500">已售 1342件</span>
+                        </div>
+                        
+                        <div class="text-lg font-medium mb-2">新鲜红富士苹果 5斤装 果径75mm以上 陕西洛川苹果</div>
+                        
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="text-xs text-primary bg-secondary px-2 py-1 rounded-full">包邮</span>
+                            <span class="text-xs text-primary bg-secondary px-2 py-1 rounded-full">24小时发货</span>
+                            <span class="text-xs text-primary bg-secondary px-2 py-1 rounded-full">7天无理由退换</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 配送方式 -->
+                    <div class="bg-white mt-2 p-4 shadow-soft">
+                        <div class="font-medium mb-3">配送方式</div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="w-5 h-5 rounded-full border border-primary flex items-center justify-center mr-2">
+                                    <div class="w-3 h-3 rounded-full bg-primary"></div>
+                                </div>
+                                <span class="text-sm">团长配送点自提</span>
+                            </div>
+                            <span class="text-xs text-gray-500">免配送费</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center mr-2">
+                                </div>
+                                <span class="text-sm">智能机器人配送</span>
+                                <span class="ml-2 text-xs text-white bg-blue-500 px-2 py-1 rounded-full">推荐</span>
+                            </div>
+                            <span class="text-xs text-gray-500">配送费¥2</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 团购信息 -->
+                    <div class="bg-white mt-2 p-4 shadow-soft">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-medium">团购信息</span>
+                            <div class="flex items-center text-xs text-primary">
+                                <span>距结束</span>
+                                <span class="bg-primary text-white mx-1 px-1 rounded">23</span>
+                                <span>:</span>
+                                <span class="bg-primary text-white mx-1 px-1 rounded">45</span>
+                                <span>:</span>
+                                <span class="bg-primary text-white mx-1 px-1 rounded">12</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Leader" class="w-10 h-10 rounded-full object-cover mr-3 border-2 border-white shadow-soft">
+                            <div>
+                                <div class="font-medium">李团长</div>
+                                <div class="text-xs text-gray-500">紫荆花园小区3号楼</div>
+                            </div>
+                            <button class="ml-auto text-xs text-primary border border-primary px-2 py-1 rounded-full">联系团长</button>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <div class="text-sm mb-2">参团用户 (56人)</div>
+                            <div class="flex -space-x-2 overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-8 h-8 rounded-full border-2 border-white object-cover shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-8 h-8 rounded-full border-2 border-white object-cover shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-8 h-8 rounded-full border-2 border-white object-cover shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-8 h-8 rounded-full border-2 border-white object-cover shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-8 h-8 rounded-full border-2 border-white object-cover shadow-soft">
+                                <div class="flex items-center justify-center w-8 h-8 rounded-full border-2 border-white bg-gray-200 text-xs font-medium shadow-soft">
+                                    +51
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 取货信息 -->
+                    <div class="bg-white mt-2 p-4 shadow-soft">
+                        <div class="font-medium mb-3">取货信息</div>
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+                            <span class="text-sm">紫荆花园小区3号楼门口</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="far fa-clock text-gray-400 mr-2"></i>
+                            <span class="text-sm">明天 15:00-18:00</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 商品详情 -->
+                    <div class="bg-white mt-2 p-4 shadow-soft">
+                        <div class="font-medium mb-3">商品详情</div>
+                        <div class="text-sm text-gray-600 leading-relaxed">
+                            <p class="mb-2">【品种】：红富士</p>
+                            <p class="mb-2">【产地】：陕西洛川</p>
+                            <p class="mb-2">【规格】：5斤装，约8-10个</p>
+                            <p class="mb-2">【果径】：75mm以上</p>
+                            <p class="mb-4">【特点】：色泽鲜艳，口感脆甜多汁，富含维生素和矿物质。</p>
+                            
+                            <img src="https://images.unsplash.com/photo-1600423115367-87ea7661688f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Product Detail" class="w-full rounded-lg mb-3 shadow-soft">
+                            <img src="https://images.unsplash.com/photo-1630563451961-ac2ff27616ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Product Detail" class="w-full rounded-lg mb-3 shadow-soft">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部操作栏 -->
+                <div class="tab-bar flex items-center">
+                    <div class="flex items-center justify-center w-14 border-r border-gray-100">
+                        <div class="flex flex-col items-center">
+                            <i class="far fa-heart text-gray-400"></i>
+                            <span class="text-xs text-gray-400 mt-1">收藏</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center w-14 border-r border-gray-100">
+                        <div class="flex flex-col items-center">
+                            <i class="far fa-comment-dots text-gray-400"></i>
+                            <span class="text-xs text-gray-400 mt-1">客服</span>
+                        </div>
+                    </div>
+                    <div class="flex-1 flex">
+                        <button class="flex-1 bg-secondary text-primary font-medium">加入购物车</button>
+                        <button class="flex-1 bg-primary text-white font-medium">立即购买</button>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">商品详情页</p>
+        </div>
+        
+        <!-- 社区页面 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="text-lg font-medium">社区</div>
+                    <div class="flex items-center">
+                        <i class="fas fa-search text-gray-500 mr-4"></i>
+                        <i class="fas fa-plus text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content bg-light">
+                    <!-- 社区分类 -->
+                    <div class="bg-white px-4 py-3 flex space-x-4 overflow-x-auto shadow-soft">
+                        <div class="text-primary font-medium border-b-2 border-primary pb-1 flex-shrink-0">推荐</div>
+                        <div class="text-gray-500 flex-shrink-0">团长动态</div>
+                        <div class="text-gray-500 flex-shrink-0">美食分享</div>
+                        <div class="text-gray-500 flex-shrink-0">生活妙招</div>
+                        <div class="text-gray-500 flex-shrink-0">团购晒单</div>
+                        <div class="text-gray-500 flex-shrink-0">邻里互助</div>
+                    </div>
+                    
+                    <!-- 社区动态 -->
+                    <div class="bg-white mt-2 p-4 shadow-soft rounded-xl mx-3">
+                        <div class="flex items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-10 h-10 rounded-full object-cover mr-3 border-2 border-white shadow-soft">
+                            <div>
+                                <div class="font-medium">李团长</div>
+                                <div class="text-xs text-gray-500">紫荆花园小区 · 10分钟前</div>
+                            </div>
+                            <button class="ml-auto text-xs text-primary border border-primary px-2 py-1 rounded-full">关注</button>
+                        </div>
+                        
+                        <div class="text-sm mb-3">
+                            今天的苹果特别新鲜，刚到货，喜欢的邻居们赶紧来参团啦！限时特惠，只要19.9元5斤装，比市场价便宜很多哦！现在下单还可以选择智能机器人配送，安全又方便！
+                        </div>
+                        
+                        <div class="grid grid-cols-3 gap-1 mb-3">
+                            <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Post" class="w-full h-24 object-cover rounded-lg shadow-soft">
+                            <img src="https://images.unsplash.com/photo-1600423115367-87ea7661688f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Post" class="w-full h-24 object-cover rounded-lg shadow-soft">
+                            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Post" class="w-full h-24 object-cover rounded-lg shadow-soft">
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-gray-500 text-sm">
+                            <div class="flex items-center">
+                                <i class="far fa-thumbs-up mr-1"></i>
+                                <span>32</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="far fa-comment mr-1"></i>
+                                <span>16</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="far fa-share-square mr-1"></i>
+                                <span>分享</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white mt-2 p-4 shadow-soft rounded-xl mx-3">
+                        <div class="flex items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-10 h-10 rounded-full object-cover mr-3 border-2 border-white shadow-soft">
+                            <div>
+                                <div class="font-medium">小红</div>
+                                <div class="text-xs text-gray-500">紫荆花园小区 · 2小时前</div>
+                            </div>
+                            <button class="ml-auto text-xs text-gray-400 border border-gray-300 px-2 py-1 rounded-full">已关注</button>
+                        </div>
+                        
+                        <div class="text-sm mb-3">
+                            今天在李团长那里买的土鸡蛋，真的很新鲜！煮鸡蛋的时候蛋黄颜色特别漂亮，口感也很好，推荐给大家~用智能机器人配送，不到半小时就送到家门口了，太方便了！
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-1 mb-3">
+                            <img src="https://images.unsplash.com/photo-1518492104633-130d0cc84637?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Post" class="w-full h-36 object-cover rounded-lg shadow-soft">
+                            <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Post" class="w-full h-36 object-cover rounded-lg shadow-soft">
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-gray-500 text-sm">
+                            <div class="flex items-center">
+                                <i class="far fa-thumbs-up mr-1"></i>
+                                <span>45</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="far fa-comment mr-1"></i>
+                                <span>23</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="far fa-share-square mr-1"></i>
+                                <span>分享</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white mt-2 p-4 shadow-soft rounded-xl mx-3">
+                        <div class="flex items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-10 h-10 rounded-full object-cover mr-3 border-2 border-white shadow-soft">
+                            <div>
+                                <div class="font-medium">王团长</div>
+                                <div class="text-xs text-gray-500">阳光小区 · 昨天</div>
+                            </div>
+                            <button class="ml-auto text-xs text-primary border border-primary px-2 py-1 rounded-full">关注</button>
+                        </div>
+                        
+                        <div class="text-sm mb-3">
+                            明天将有新鲜的有机蔬菜到货，包括青菜、番茄、黄瓜等，都是从本地农场直接采购的，保证新鲜！有需要的邻居可以提前报名参团哦！我们小区已经启用智能配送机器人，可以直接送到家门口！
+                        </div>
+                        
+                        <div class="mb-3">
+                            <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Post" class="w-full h-48 object-cover rounded-lg shadow-soft">
+                        </div>
+                        
+                        <div class="flex items-center justify-between text-gray-500 text-sm">
+                            <div class="flex items-center">
+                                <i class="far fa-thumbs-up mr-1"></i>
+                                <span>28</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="far fa-comment mr-1"></i>
+                                <span>12</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="far fa-share-square mr-1"></i>
+                                <span>分享</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar flex justify-around items-center px-2">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-home text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">首页</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-th-large text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">分类</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-users text-primary text-xl"></i>
+                        <span class="text-xs mt-1 text-primary">社区</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">购物车</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-user text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">我的</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">社区页面</p>
+        </div>
+        
+        <!-- 购物车页面 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="text-lg font-medium">购物车</div>
+                    <div class="text-sm text-gray-500">管理</div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content bg-light">
+                    <!-- 购物车商品 -->
+                    <div class="bg-white p-4 shadow-soft rounded-xl mx-3 mt-3">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-store text-gray-400 mr-2"></i>
+                            <span class="font-medium">李团长的小店</span>
+                        </div>
+                        
+                        <div class="flex py-3 border-t border-gray-100">
+                            <div class="flex items-center mr-3">
+                                <div class="w-5 h-5 rounded-full border border-primary flex items-center justify-center">
+                                    <div class="w-3 h-3 rounded-full bg-primary"></div>
+                                </div>
+                            </div>
+                            <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden mr-3 shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-sm font-medium mb-1 line-clamp-2">新鲜红富士苹果 5斤装</div>
+                                <div class="text-xs text-gray-500 mb-2">精选 | 75mm以上</div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-primary font-bold">¥19.9</div>
+                                    <div class="flex items-center">
+                                        <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center shadow-soft">
+                                            <i class="fas fa-minus text-xs text-gray-500"></i>
+                                        </button>
+                                        <span class="mx-2 text-sm">1</span>
+                                        <button class="w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-soft">
+                                            <i class="fas fa-plus text-xs text-white"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex py-3 border-t border-gray-100">
+                            <div class="flex items-center mr-3">
+                                <div class="w-5 h-5 rounded-full border border-primary flex items-center justify-center">
+                                    <div class="w-3 h-3 rounded-full bg-primary"></div>
+                                </div>
+                            </div>
+                            <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden mr-3 shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-sm font-medium mb-1 line-clamp-2">农家散养土鸡蛋 30枚</div>
+                                <div class="text-xs text-gray-500 mb-2">新鲜 | 无添加</div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-primary font-bold">¥29.9</div>
+                                    <div class="flex items-center">
+                                        <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center shadow-soft">
+                                            <i class="fas fa-minus text-xs text-gray-500"></i>
+                                        </button>
+                                        <span class="mx-2 text-sm">2</span>
+                                        <button class="w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-soft">
+                                            <i class="fas fa-plus text-xs text-white"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 shadow-soft rounded-xl mx-3 mt-3">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-store text-gray-400 mr-2"></i>
+                            <span class="font-medium">王团长的小店</span>
+                        </div>
+                        
+                        <div class="flex py-3 border-t border-gray-100">
+                            <div class="flex items-center mr-3">
+                                <div class="w-5 h-5 rounded-full border border-primary flex items-center justify-center">
+                                    <div class="w-3 h-3 rounded-full bg-primary"></div>
+                                </div>
+                            </div>
+                            <div class="w-20 h-20 bg-gray-100 rounded-lg overflow-hidden mr-3 shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1">
+                                <div class="text-sm font-medium mb-1 line-clamp-2">有机蔬菜套餐 10斤装</div>
+                                <div class="text-xs text-gray-500 mb-2">新鲜 | 当日采摘</div>
+                                                                <div class="flex justify-between items-center">
+                                    <div class="text-primary font-bold">¥49.9</div>
+                                    <div class="flex items-center">
+                                        <button class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center shadow-soft">
+                                            <i class="fas fa-minus text-xs text-gray-500"></i>
+                                        </button>
+                                        <span class="mx-2 text-sm">1</span>
+                                        <button class="w-6 h-6 bg-primary rounded-full flex items-center justify-center shadow-soft">
+                                            <i class="fas fa-plus text-xs text-white"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配送方式选择 -->
+                    <div class="bg-white p-4 shadow-soft rounded-xl mx-3 mt-3">
+                        <div class="font-medium mb-3">配送方式</div>
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="w-5 h-5 rounded-full border border-primary flex items-center justify-center mr-2">
+                                    <div class="w-3 h-3 rounded-full bg-primary"></div>
+                                </div>
+                                <span class="text-sm">团长配送点自提</span>
+                            </div>
+                            <span class="text-xs text-gray-500">免配送费</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-5 h-5 rounded-full border border-gray-300 flex items-center justify-center mr-2">
+                                </div>
+                                <span class="text-sm">智能机器人配送</span>
+                                <span class="ml-2 text-xs text-white bg-blue-500 px-2 py-1 rounded-full">推荐</span>
+                            </div>
+                            <span class="text-xs text-gray-500">配送费¥2</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 猜你喜欢 -->
+                    <div class="mt-4 mx-3">
+                        <div class="text-base font-medium mb-3">猜你喜欢</div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1550258987-e8b4a8a464a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜葡萄 2斤装</div>
+                                    <div class="text-primary font-bold">¥15.9</div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1550828520-4cb496926fc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜草莓 500g装</div>
+                                    <div class="text-primary font-bold">¥19.9</div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1573246123716-6b1782bfc499?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜胡萝卜 3斤装</div>
+                                    <div class="text-primary font-bold">¥9.9</div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-xl overflow-hidden shadow-soft">
+                                <img src="https://images.unsplash.com/photo-1594282486552-05a3b6fbfb63?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-full h-32 object-cover">
+                                <div class="p-2">
+                                    <div class="text-sm font-medium mb-1 line-clamp-2">新鲜茄子 2斤装</div>
+                                    <div class="text-primary font-bold">¥7.9</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部结算栏 -->
+                <div class="tab-bar flex items-center px-4">
+                    <div class="flex items-center">
+                        <div class="w-5 h-5 rounded-full border border-primary flex items-center justify-center mr-2">
+                            <div class="w-3 h-3 rounded-full bg-primary"></div>
+                        </div>
+                        <span class="text-sm">全选</span>
+                    </div>
+                    <div class="flex items-center ml-auto mr-4">
+                        <div class="text-sm">合计：</div>
+                        <div class="text-primary font-bold text-lg">¥129.6</div>
+                    </div>
+                    <button class="bg-primary text-white px-6 py-2 rounded-full font-medium shadow-soft">
+                        结算(4)
+                    </button>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">购物车页面</p>
+        </div>
+        
+        <!-- 个人中心页面 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="text-lg font-medium">个人中心</div>
+                    <div class="flex items-center">
+                        <i class="fas fa-cog text-gray-500 mr-4"></i>
+                        <i class="fas fa-bell text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content bg-light">
+                    <!-- 用户信息 -->
+                    <div class="bg-primary text-white p-4 rounded-b-3xl shadow-soft">
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-soft">
+                            <div class="ml-4">
+                                <div class="text-lg font-medium">小红</div>
+                                <div class="text-sm opacity-80">紫荆花园小区</div>
+                            </div>
+                            <button class="ml-auto bg-white bg-opacity-20 text-white text-xs px-3 py-1 rounded-full">
+                                编辑资料
+                            </button>
+                        </div>
+                        
+                        <div class="flex justify-between mt-4">
+                            <div class="text-center">
+                                <div class="text-lg font-medium">12</div>
+                                <div class="text-xs opacity-80">收藏</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-medium">28</div>
+                                <div class="text-xs opacity-80">关注</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-medium">56</div>
+                                <div class="text-xs opacity-80">粉丝</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-medium">8</div>
+                                <div class="text-xs opacity-80">动态</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 智能配送入口 -->
+                    <div class="bg-white mt-4 p-4 rounded-xl shadow-soft mx-3">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-3 shadow-soft">
+                                <i class="fas fa-robot text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium">智能配送</div>
+                                <div class="text-xs text-gray-500">查看配送进度，享受无接触配送体验</div>
+                            </div>
+                            <button class="bg-blue-500 text-white text-xs px-3 py-1 rounded-full">
+                                立即查看
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 我的订单 -->
+                    <div class="bg-white mt-4 p-4 rounded-xl shadow-soft mx-3">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="font-medium">我的订单</div>
+                            <div class="text-xs text-gray-500 flex items-center">
+                                <span>查看全部</span>
+                                <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-credit-card text-primary"></i>
+                                </div>
+                                <span class="text-xs">待付款</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-box text-primary"></i>
+                                </div>
+                                <span class="text-xs">待配送</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-truck text-primary"></i>
+                                </div>
+                                <span class="text-xs">配送中</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-box-open text-primary"></i>
+                                </div>
+                                <span class="text-xs">待取货</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-comment-dots text-primary"></i>
+                                </div>
+                                <span class="text-xs">待评价</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 我的服务 -->
+                    <div class="bg-white mt-4 p-4 rounded-xl shadow-soft mx-3">
+                        <div class="font-medium mb-4">我的服务</div>
+                        
+                        <div class="grid grid-cols-4 gap-3">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <span class="text-xs">收货地址</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-headset text-primary"></i>
+                                </div>
+                                <span class="text-xs">客服中心</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-ticket-alt text-primary"></i>
+                                </div>
+                                <span class="text-xs">优惠券</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-star text-primary"></i>
+                                </div>
+                                <span class="text-xs">收藏商品</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-store text-primary"></i>
+                                </div>
+                                <span class="text-xs">关注店铺</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-history text-primary"></i>
+                                </div>
+                                <span class="text-xs">浏览历史</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-user-friends text-primary"></i>
+                                </div>
+                                <span class="text-xs">邀请好友</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-ellipsis-h text-primary"></i>
+                                </div>
+                                <span class="text-xs">更多服务</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 团长入口 -->
+                    <div class="bg-white mt-4 p-4 rounded-xl shadow-soft mx-3 flex items-center">
+                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mr-3 shadow-soft">
+                            <i class="fas fa-crown text-primary"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="font-medium">成为团长</div>
+                            <div class="text-xs text-gray-500">开启社区团购创业之旅</div>
+                        </div>
+                        <button class="bg-primary text-white text-xs px-3 py-1 rounded-full">
+                            立即申请
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar flex justify-around items-center px-2">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-home text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">首页</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-th-large text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">分类</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-users text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">社区</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-shopping-cart text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">购物车</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-user text-primary text-xl"></i>
+                        <span class="text-xs mt-1 text-primary">我的</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">个人中心页面</p>
+        </div>
+        
+        <!-- 团长中心页面 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="text-lg font-medium">团长中心</div>
+                    <div class="flex items-center">
+                        <i class="fas fa-bell text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content bg-light">
+                    <!-- 团长信息 -->
+                    <div class="bg-primary text-white p-4 rounded-b-3xl shadow-soft">
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="User" class="w-16 h-16 rounded-full object-cover border-2 border-white shadow-soft">
+                            <div class="ml-4">
+                                <div class="text-lg font-medium">李团长</div>
+                                <div class="text-sm opacity-80">紫荆花园小区3号楼</div>
+                            </div>
+                            <div class="ml-auto bg-white bg-opacity-20 text-white text-xs px-3 py-1 rounded-full">
+                                已认证
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between mt-4">
+                            <div class="text-center">
+                                <div class="text-lg font-medium">¥1,286</div>
+                                <div class="text-xs opacity-80">总收益</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-medium">¥286</div>
+                                <div class="text-xs opacity-80">本月收益</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-medium">128</div>
+                                <div class="text-xs opacity-80">团员数</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-lg font-medium">56</div>
+                                <div class="text-xs opacity-80">订单数</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配送管理入口 -->
+                    <div class="bg-white mt-4 p-4 rounded-xl shadow-soft mx-3">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-3 shadow-soft">
+                                <i class="fas fa-robot text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="font-medium">智能配送管理</div>
+                                <div class="text-xs text-gray-500">管理配送机器人，提升配送效率</div>
+                            </div>
+                            <button class="bg-blue-500 text-white text-xs px-3 py-1 rounded-full">
+                                立即管理
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 团购活动 -->
+                    <div class="bg-white mt-4 p-4 rounded-xl shadow-soft mx-3">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="font-medium">团购活动</div>
+                            <div class="text-xs text-gray-500 flex items-center">
+                                <span>查看全部</span>
+                                <i class="fas fa-chevron-right ml-1 text-xs"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-100 rounded-xl p-3 mb-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">新鲜红富士苹果 5斤装</div>
+                                <div class="text-xs text-white bg-primary px-2 py-1 rounded-full">进行中</div>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mr-3 shadow-soft">
+                                <div class="flex-1">
+                                    <div class="flex items-baseline mb-1">
+                                        <span class="text-primary font-bold">¥19.9</span>
+                                        <span class="text-xs text-gray-500 ml-1">佣金：¥2/件</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span>已售 42件</span>
+                                        <span class="mx-2">|</span>
+                                        <span>剩余 2天</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex mt-3">
+                                <button class="flex-1 text-xs border border-gray-300 rounded-full py-1 mr-2">编辑</button>
+                                <button class="flex-1 text-xs border border-gray-300 rounded-full py-1 mr-2">查看详情</button>
+                                <button class="flex-1 text-xs text-primary border border-primary rounded-full py-1">发布通知</button>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-100 rounded-xl p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">农家散养土鸡蛋 30枚</div>
+                                <div class="text-xs text-white bg-primary px-2 py-1 rounded-full">进行中</div>
+                            </div>
+                            <div class="flex items-center">
+                                <img src="https://images.unsplash.com/photo-1587486913049-53fc88980cfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Product" class="w-16 h-16 rounded-lg object-cover mr-3 shadow-soft">
+                                <div class="flex-1">
+                                    <div class="flex items-baseline mb-1">
+                                        <span class="text-primary font-bold">¥29.9</span>
+                                        <span class="text-xs text-gray-500 ml-1">佣金：¥3/件</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-gray-500">
+                                        <span>已售 28件</span>
+                                        <span class="mx-2">|</span>
+                                        <span>剩余 3天</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex mt-3">
+                                <button class="flex-1 text-xs border border-gray-300 rounded-full py-1 mr-2">编辑</button>
+                                <button class="flex-1 text-xs border border-gray-300 rounded-full py-1 mr-2">查看详情</button>
+                                <button class="flex-1 text-xs text-primary border border-primary rounded-full py-1">发布通知</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 数据统计 -->
+                    <div class="bg-white mt-4 p-4 rounded-xl shadow-soft mx-3">
+                        <div class="font-medium mb-4">数据统计</div>
+                        
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="bg-secondary rounded-xl p-3">
+                                <div class="text-sm text-gray-500 mb-1">总销售额</div>
+                                <div class="text-xl font-bold text-primary">¥3,286</div>
+                                <div class="flex items-center text-xs mt-2">
+                                    <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                                    <span class="text-green-500">12.5%</span>
+                                    <span class="text-gray-500 ml-1">较上周</span>
+                                </div>
+                            </div>
+                            <div class="bg-secondary rounded-xl p-3">
+                                <div class="text-sm text-gray-500 mb-1">总佣金</div>
+                                <div class="text-xl font-bold text-primary">¥286</div>
+                                <div class="flex items-center text-xs mt-2">
+                                    <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                                    <span class="text-green-500">8.3%</span>
+                                    <span class="text-gray-500 ml-1">较上周</span>
+                                </div>
+                            </div>
+                            <div class="bg-secondary rounded-xl p-3">
+                                <div class="text-sm text-gray-500 mb-1">订单数量</div>
+                                <div class="text-xl font-bold text-primary">128</div>
+                                <div class="flex items-center text-xs mt-2">
+                                    <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                                    <span class="text-green-500">15.2%</span>
+                                    <span class="text-gray-500 ml-1">较上周</span>
+                                </div>
+                            </div>
+                            <div class="bg-secondary rounded-xl p-3">
+                                <div class="text-sm text-gray-500 mb-1">团员数量</div>
+                                <div class="text-xl font-bold text-primary">56</div>
+                                <div class="flex items-center text-xs mt-2">
+                                    <i class="fas fa-arrow-up text-green-500 mr-1"></i>
+                                    <span class="text-green-500">5.6%</span>
+                                    <span class="text-gray-500 ml-1">较上周</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 团长工具 -->
+                    <div class="bg-white mt-4 p-4 rounded-xl shadow-soft mx-3">
+                        <div class="font-medium mb-4">团长工具</div>
+                        
+                        <div class="grid grid-cols-4 gap-3">
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-plus text-primary"></i>
+                                </div>
+                                <span class="text-xs">发起团购</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-clipboard-list text-primary"></i>
+                                </div>
+                                <span class="text-xs">订单管理</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-users text-primary"></i>
+                                </div>
+                                <span class="text-xs">团员管理</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-wallet text-primary"></i>
+                                </div>
+                                <span class="text-xs">佣金提现</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-bullhorn text-primary"></i>
+                                </div>
+                                <span class="text-xs">团购推广</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-chart-line text-primary"></i>
+                                </div>
+                                <span class="text-xs">数据分析</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <span class="text-xs">配送点</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center mb-1 shadow-soft">
+                                    <i class="fas fa-cog text-primary"></i>
+                                </div>
+                                <span class="text-xs">设置</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部导航栏 -->
+                <div class="tab-bar flex justify-around items-center px-2">
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-home text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">首页</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-clipboard-list text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">订单</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-users text-gray-400 text-xl"></i>
+                        <span class="text-xs mt-1 text-gray-400">团员</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-crown text-primary text-xl"></i>
+                        <span class="text-xs mt-1 text-primary">团长</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">团长中心页面</p>
+        </div>
+        
+        <!-- 智能配送页面 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-left text-gray-500 mr-3"></i>
+                        <div class="text-lg font-medium">智能配送</div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-question-circle text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content bg-light">
+                    <!-- 配送机器人状态 -->
+                    <div class="bg-white p-4 rounded-xl shadow-soft mx-3 mt-3">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="font-medium">配送机器人状态</div>
+                            <div class="text-xs text-white bg-green-500 px-2 py-1 rounded-full">运行中</div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Delivery Robot" class="w-20 h-20 rounded-lg object-cover mr-3 shadow-soft">
+                            <div class="flex-1">
+                                <div class="font-medium mb-1">智能配送机器人 #A2568</div>
+                                <div class="flex items-center text-xs text-gray-500 mb-1">
+                                    <i class="fas fa-battery-three-quarters text-green-500 mr-1"></i>
+                                    <span>电量: 85%</span>
+                                    <span class="mx-2">|</span>
+                                    <i class="fas fa-signal text-green-500 mr-1"></i>
+                                    <span>信号: 良好</span>
+                                </div>
+                                <div class="text-xs text-gray-500">当前位置: 紫荆花园小区3号楼附近</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3 flex">
+                            <button class="flex-1 text-xs bg-primary text-white rounded-full py-2 mr-2 flex items-center justify-center">
+                                <i class="fas fa-video mr-1"></i>
+                                <span>实时监控</span>
+                            </button>
+                            <button class="flex-1 text-xs border border-primary text-primary rounded-full py-2 flex items-center justify-center">
+                                <i class="fas fa-location-arrow mr-1"></i>
+                                <span>查看位置</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 当前配送任务 -->
+                    <div class="bg-white p-4 rounded-xl shadow-soft mx-3 mt-3">
+                        <div class="font-medium mb-3">当前配送任务</div>
+                        
+                        <div class="border border-gray-100 rounded-xl p-3 mb-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">订单 #86523</div>
+                                <div class="text-xs text-white bg-blue-500 px-2 py-1 rounded-full">配送中</div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 flex flex-col items-center">
+                                    <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center shadow-soft">
+                                        <i class="fas fa-store text-primary text-sm"></i>
+                                    </div>
+                                    <div class="h-10 border-l border-dashed border-gray-300"></div>
+                                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-soft">
+                                        <i class="fas fa-map-marker-alt text-white text-sm"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-3">
+                                        <div class="text-sm">紫荆花园小区3号楼 - 李团长</div>
+                                        <div class="text-xs text-gray-500">取货点</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm">紫荆花园小区5号楼2单元601</div>
+                                        <div class="text-xs text-gray-500">张先生 · 138****5678</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 pt-3 border-t border-gray-100">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="text-sm">预计送达时间</div>
+                                    <div class="text-sm font-medium">今天 16:30-16:45</div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm">配送码</div>
+                                    <div class="text-lg font-bold tracking-wider">8642</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-100 rounded-xl p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">订单 #86527</div>
+                                <div class="text-xs text-white bg-yellow-500 px-2 py-1 rounded-full">待配送</div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-12 flex flex-col items-center">
+                                    <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center shadow-soft">
+                                        <i class="fas fa-store text-primary text-sm"></i>
+                                    </div>
+                                    <div class="h-10 border-l border-dashed border-gray-300"></div>
+                                    <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center shadow-soft">
+                                        <i class="fas fa-map-marker-alt text-gray-400 text-sm"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="mb-3">
+                                        <div class="text-sm">紫荆花园小区3号楼 - 李团长</div>
+                                        <div class="text-xs text-gray-500">取货点</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm">紫荆花园小区2号楼1单元302</div>
+                                        <div class="text-xs text-gray-500">王女士 · 139****1234</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 pt-3 border-t border-gray-100">
+                                <div class="flex justify-between items-center mb-2">
+                                    <div class="text-sm">预计送达时间</div>
+                                    <div class="text-sm font-medium">今天 17:00-17:15</div>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <div class="text-sm">配送码</div>
+                                    <div class="text-lg font-bold tracking-wider">3579</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配送地图 -->
+                    <div class="bg-white p-4 rounded-xl shadow-soft mx-3 mt-3">
+                        <div class="font-medium mb-3">配送路线</div>
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Map" class="w-full h-48 object-cover rounded-lg shadow-soft">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <button class="bg-white bg-opacity-90 text-primary px-4 py-2 rounded-full text-sm font-medium shadow-soft flex items-center">
+                                    <i class="fas fa-expand-alt mr-2"></i>
+                                    <span>查看详细地图</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配送设置 -->
+                    <div class="bg-white p-4 rounded-xl shadow-soft mx-3 mt-3 mb-3">
+                        <div class="font-medium mb-3">配送设置</div>
+                        
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center mr-3 shadow-soft">
+                                    <i class="fas fa-bell text-primary"></i>
+                                </div>
+                                <span class="text-sm">到达提醒</span>
+                            </div>
+                            <div class="relative">
+                                <input type="checkbox" id="notification" class="sr-only" checked>
+                                <label for="notification" class="block w-12 h-6 rounded-full bg-primary cursor-pointer"></label>
+                                <span class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white shadow-md"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center mr-3 shadow-soft">
+                                    <i class="fas fa-lock text-primary"></i>
+                                </div>
+                                <span class="text-sm">安全密码取件</span>
+                            </div>
+                            <div class="relative">
+                                <input type="checkbox" id="security" class="sr-only" checked>
+                                <label for="security" class="block w-12 h-6 rounded-full bg-primary cursor-pointer"></label>
+                                <span class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white shadow-md"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between py-2">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-secondary rounded-full flex items-center justify-center mr-3 shadow-soft">
+                                    <i class="fas fa-robot text-primary"></i>
+                                </div>
+                                <span class="text-sm">语音交互</span>
+                            </div>
+                            <div class="relative">
+                                <input type="checkbox" id="voice" class="sr-only" checked>
+                                <label for="voice" class="block w-12 h-6 rounded-full bg-primary cursor-pointer"></label>
+                                <span class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white shadow-md"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部操作栏 -->
+                <div class="tab-bar flex items-center justify-around px-4">
+                    <button class="flex-1 bg-secondary text-primary font-medium py-2 rounded-l-full">
+                        呼叫机器人
+                    </button>
+                    <button class="flex-1 bg-primary text-white font-medium py-2 rounded-r-full">
+                        发起配送
+                    </button>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">智能配送页面</p>
+        </div>
+        
+        <!-- 团长配送管理页面 -->
+        <div class="mb-8">
+            <div class="phone-mockup">
+                <!-- 状态栏 -->
+                <div class="status-bar">
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-left text-gray-500 mr-3"></i>
+                        <div class="text-lg font-medium">配送管理</div>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-plus text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <!-- 内容区域 -->
+                <div class="content bg-light">
+                    <!-- 配送设备管理 -->
+                    <div class="bg-white p-4 rounded-xl shadow-soft mx-3 mt-3">
+                        <div class="font-medium mb-3">配送设备</div>
+                        
+                        <div class="flex items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Delivery Robot" class="w-16 h-16 rounded-lg object-cover mr-3 shadow-soft">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div class="font-medium">智能配送机器人 #A2568</div>
+                                    <div class="text-xs text-white bg-green-500 px-2 py-1 rounded-full">运行中</div>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-500 mt-1">
+                                    <i class="fas fa-battery-three-quarters text-green-500 mr-1"></i>
+                                    <span>电量: 85%</span>
+                                    <span class="mx-2">|</span>
+                                    <i class="fas fa-box text-blue-500 mr-1"></i>
+                                    <span>载货: 2/6</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center mb-3">
+                            <img src="https://images.unsplash.com/photo-1589254065878-42c9da997008?ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="Delivery Robot" class="w-16 h-16 rounded-lg object-cover mr-3 shadow-soft">
+                            <div class="flex-1">
+                                <div class="flex items-center justify-between">
+                                    <div class="font-medium">智能配送机器人 #B1357</div>
+                                    <div class="text-xs text-white bg-gray-500 px-2 py-1 rounded-full">充电中</div>
+                                </div>
+                                <div class="flex items-center text-xs text-gray-500 mt-1">
+                                    <i class="fas fa-battery-quarter text-yellow-500 mr-1"></i>
+                                    <span>电量: 25%</span>
+                                    <span class="mx-2">|</span>
+                                    <i class="fas fa-box text-blue-500 mr-1"></i>
+                                    <span>载货: 0/6</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="w-full text-primary border border-primary rounded-full py-2 text-sm font-medium mt-2">
+                            添加配送设备
+                        </button>
+                    </div>
+                    
+                    <!-- 待配送订单 -->
+                    <div class="bg-white p-4 rounded-xl shadow-soft mx-3 mt-3">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="font-medium">待配送订单</div>
+                            <div class="text-xs text-primary">查看全部</div>
+                        </div>
+                        
+                        <div class="border border-gray-100 rounded-xl p-3 mb-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">订单 #86527</div>
+                                <button class="text-xs text-white bg-primary px-3 py-1 rounded-full">
+                                    分配配送
+                                </button>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+                                <div class="text-sm">紫荆花园小区2号楼1单元302</div>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-user text-gray-400 mr-2"></i>
+                                <div class="text-sm">王女士 · 139****1234</div>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <i class="fas fa-shopping-bag mr-1"></i>
+                                <span>3件商品</span>
+                                <span class="mx-2">|</span>
+                                <i class="far fa-clock mr-1"></i>
+                                <span>下单时间: 今天 15:23</span>
+                            </div>
+                        </div>
+                        
+                        <div class="border border-gray-100 rounded-xl p-3">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="font-medium">订单 #86530</div>
+                                <button class="text-xs text-white bg-primary px-3 py-1 rounded-full">
+                                    分配配送
+                                </button>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-map-marker-alt text-gray-400 mr-2"></i>
+                                <div class="text-sm">紫荆花园小区1号楼3单元502</div>
+                            </div>
+                            <div class="flex items-center mb-2">
+                                <i class="fas fa-user text-gray-400 mr-2"></i>
+                                <div class="text-sm">刘先生 · 136****9876</div>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <i class="fas fa-shopping-bag mr-1"></i>
+                                <span>2件商品</span>
+                                <span class="mx-2">|</span>
+                                <i class="far fa-clock mr-1"></i>
+                                <span>下单时间: 今天 15:45</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 配送统计 -->
+                    <div class="bg-white p-4 rounded-xl shadow-soft mx-3 mt-3 mb-3">
+                        <div class="font-medium mb-3">配送统计</div>
+                        
+                        <div class="grid grid-cols-3 gap-3 mb-3">
+                            <div class="bg-secondary rounded-xl p-3 text-center">
+                                <div class="text-2xl font-bold text-primary">12</div>
+                                <div class="text-xs text-gray-500">今日配送</div>
+                            </div>
+                            <div class="bg-secondary rounded-xl p-3 text-center">
+                                <div class="text-2xl font-bold text-primary">2</div>
+                                <div class="text-xs text-gray-500">配送中</div>
+                            </div>
+                            <div class="bg-secondary rounded-xl p-3 text-center">
+                                <div class="text-2xl font-bold text-primary">10</div>
+                                <div class="text-xs text-gray-500">已完成</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <div class="text-sm">平均配送时间</div>
+                            <div class="text-sm font-medium">18分钟</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <div class="text-sm">准时率</div>
+                            <div class="text-sm font-medium text-green-500">98%</div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between py-2">
+                            <div class="text-sm">用户满意度</div>
+                            <div class="text-sm font-medium text-green-500">4.8/5.0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-2 text-gray-700 font-medium">团长配送管理页面</p>
+        </div>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
